@@ -23,4 +23,5 @@ import xadmin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', xadmin.site.urls),
+    path('favicon.ico', serve, {'path': 'xadmin/img/favicon.ico'}),
 ]

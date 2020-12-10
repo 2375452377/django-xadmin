@@ -9,12 +9,14 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
 import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(BASE_DIR.parent / 'src'))
+sys.path.insert(0, str(BASE_DIR / 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,12 +24,6 @@ sys.path.insert(0, str(BASE_DIR.parent / 'src'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1044xaoqc*i)9i=b66w8$e+6(7a27*c+n@tuipq@mxl*#-m1hx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -124,12 +120,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# debug模式下要配置，不然找不到路径
-# 先在这个路径下查找static文件，找不到再去apps下的static目录查找
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
-# 这个路径只在执行python manage.py collectstatic时才用到，debug模式下没用
-# STATIC_ROOT = BASE_DIR / 'static'
