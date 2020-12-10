@@ -1,0 +1,64 @@
+{% load i18n static xadmin_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+  {% block extrameta %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+  {% endblock %}
+
+  {% block blockbots %}
+    <meta name="robots" content="NONE,NOARCHIVE"/>
+  {% endblock %}
+
+  <title>{% block title %}{{ site_web }}{% endblock %}</title>
+
+  <link rel="stylesheet" type="text/css" href="{% static "xadmin/vendor/bootstrap/css/bootstrap.min.css" %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static "xadmin/vendor/font-awesome/css/all.min.css" %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/xadmin.main.css" %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/xadmin.plugins.css" %}"/>
+
+  {{ media.css }}
+
+  {% block extrastyle %}{% endblock %}
+
+  <script src="{% static 'xadmin/vendor/jquery/jquery.min.js' %}"></script>
+
+  {% url 'xadmin:index' as index_url %}
+  <script type="text/javascript">
+    window.__admin_media_prefix__ = "{% filter escapejs %}{% static 'xadmin/' %}{% endfilter %}";
+    window.__admin_path_prefix__ = "{% filter escapejs %}{{ index_url }}{% endfilter %}";
+    window.__admin_language_code__ = "{{ LANGUAGE_CODE }}";
+  </script>
+  {% if request.user.is_authenticated %}
+    <script type="text/javascript" src="{% url 'xadmin:jsi18n' %}"></script>
+  {% endif %}
+
+  {% block extrahead %}{% endblock %}
+
+  {% view_block 'extrahead' %}
+</head>
+
+<body class="{% block bodyclass %}{% endblock %}">
+{% block body %}
+  <div id="content-block" class="col-sm-12">
+    {% block content %}{% endblock %}
+  </div>
+{% endblock %}
+
+<script src="{% static 'xadmin/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'xadmin/js/xadmin.main.js' %}"></script>
+
+{{ media.js }}
+
+{% block extrabody %}{% endblock %}
+
+{% view_block 'extrabody' %}
+
+</body>
+</html>
