@@ -5,7 +5,7 @@ from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
 from xadmin.forms import AdminAuthenticationForm
-from xadmin.views.base import BaseAdminView
+from xadmin.views import BaseAdminView
 
 
 class IndexView(TemplateView):

@@ -1,4 +1,4 @@
-from xadmin.views.base import BaseAdminPlugin
+from xadmin.views import BaseAdminPlugin
 
 
 class BasePortalPlugin(BaseAdminPlugin):
