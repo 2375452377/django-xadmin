@@ -2,14 +2,18 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.views import LoginView as login
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
-from django.views.generic import TemplateView
 
 from xadmin.forms import AdminAuthenticationForm
 from xadmin.views import BaseAdminView
+from xadmin.views.dashboard import Dashboard
 
 
-class IndexView(TemplateView):
-    template_name = 'xadmin/base_site.html'
+class IndexView(Dashboard):
+    title = _('Main Dashboard')
+    icon = 'fa fa-dashboard'
+
+    def get_page_id(self):
+        return 'home'
 
 
 class LoginView(BaseAdminView):

@@ -353,7 +353,7 @@ class AdminSite:
 
     @property
     def urls(self):
-        return self.get_urls(), self.app_name, self.name
+        return self.get_urls(), self.name, self.app_name
 
     def i18n_javascript(self, request, extra_context=None):
         """

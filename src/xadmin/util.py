@@ -55,3 +55,20 @@ def vendor(*tags):
         elif file_type == 'css':
             css['screen'] += files
     return Media(css=css, js=js)
+
+
+def sortkeypicker(keynames):
+    negate = set()
+    for index, key in enumerate(keynames):
+        # 获取需要反向排序的 key
+        if key[:1] == '-':
+            keynames[index] = key[1:]
+            negate.add(key[1:])
+
+    def getit(adict):
+        composite = [adict[k] for k in keynames]
+        for i, (k, v) in enumerate(zip(keynames, composite)):
+            if k in negate:
+                composite[i] = -v
+        return composite
+    return getit

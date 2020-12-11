@@ -1,9 +1,14 @@
-from xadmin.sites import site
+from xadmin.sites import site, AdminSite
 
-default_app_config = 'xadmin.apps.XadminConfig'
+default_app_config = 'xadmin.apps.XAdminConfig'
 
 
 def autodiscover():
+    """
+    Auto-discover INSTALLED_APPS adminx.py modules and fail silently when
+    not present. This forces an import on them to register any admin bits they
+    may want.
+    """
     from importlib import import_module
     from django.apps import apps
     from django.conf import settings
@@ -17,13 +22,13 @@ def autodiscover():
         'fileinput': 'fileinput fileUpload form-control',
         'passwordinput': 'textinput textInput form-control',
     })
-    
+
     register_builtin_views(site)
     register_builtin_plugins()
 
     for app_config in apps.get_app_configs():
         mod = import_module(app_config.name)
-        # Attempt to import the app's admin module.
+        # Attempt to import the app's adminx module.
         try:
             before_import_registry = site.copy_registry()
             import_module(f'{app_config.name}.adminx')

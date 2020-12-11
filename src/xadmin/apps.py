@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class XadminConfig(AppConfig):
+class XAdminConfig(AppConfig):
     name = 'xadmin'
 
     def ready(self):

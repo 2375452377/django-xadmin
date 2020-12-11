@@ -19,9 +19,13 @@
 
   {% vendor 'bootstrap.css' %}
 
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}"/>
+  {% if site_theme %}
+    <link rel="stylesheet" type="text/css" id="site-theme" href="{{ site_theme }}"/>
+  {% else %}
+    <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}"/>
+  {% endif %}
 
-  {% vendor 'font-awesome.css' 'xadmin.main.css' 'xadmin.plugins.css' %}
+  {% vendor 'font-awesome.css' 'xadmin.main.css' 'xadmin.plugins.css' 'xadmin.responsive.css' %}
 
   {{ media.css }}
 
@@ -52,7 +56,7 @@
   </div>
 {% endblock %}
 
-{% vendor 'bootstrap.js' 'xadmin.main.js' %}
+{% vendor 'jquery-ui-sortable.js' 'bootstrap.js' 'xadmin.main.js' 'xadmin.responsive.js' %}
 
 {{ media.js }}
 
