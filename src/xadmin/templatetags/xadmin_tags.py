@@ -1,6 +1,8 @@
 from django.template import Library
 from django.utils.safestring import mark_safe
 
+from xadmin.util import vendor as util_vendor
+
 register = Library()
 
 
@@ -22,3 +24,8 @@ def view_block(context, block_name, *args, **kwargs):
     if nodes:
         return mark_safe(''.join(nodes))
     return ''
+
+
+@register.simple_tag
+def vendor(*tags):
+    return util_vendor(*tags).render()

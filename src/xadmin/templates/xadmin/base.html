@@ -17,17 +17,17 @@
 
   <title>{% block title %}{{ site_web }}{% endblock %}</title>
 
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/vendor/bootstrap/css/bootstrap.min.css" %}"/>
+  {% vendor 'bootstrap.css' %}
+
   <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/themes/bootstrap-xadmin.css" %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/vendor/font-awesome/css/all.min.css" %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/xadmin.main.css" %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static "xadmin/css/xadmin.plugins.css" %}"/>
+
+  {% vendor 'font-awesome.css' 'xadmin.main.css' 'xadmin.plugins.css' %}
 
   {{ media.css }}
 
   {% block extrastyle %}{% endblock %}
 
-  <script src="{% static 'xadmin/vendor/jquery/jquery.min.js' %}"></script>
+  {% vendor 'jquery.js' %}
 
   {% url 'xadmin:index' as index_url %}
   <script type="text/javascript">
@@ -35,6 +35,7 @@
     window.__admin_path_prefix__ = "{% filter escapejs %}{{ index_url }}{% endfilter %}";
     window.__admin_language_code__ = "{{ LANGUAGE_CODE }}";
   </script>
+
   {% if request.user.is_authenticated %}
     <script type="text/javascript" src="{% url 'xadmin:jsi18n' %}"></script>
   {% endif %}
@@ -51,8 +52,7 @@
   </div>
 {% endblock %}
 
-<script src="{% static 'xadmin/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'xadmin/js/xadmin.main.js' %}"></script>
+{% vendor 'bootstrap.js' 'xadmin.main.js' %}
 
 {{ media.js }}
 
